@@ -1,120 +1,223 @@
-📘 Finova Financial Calculation Engine (MVP)
+## 📘 Finova Financial Calculation Engine (MVP)
 
-This repository contains the deterministic financial engine for the Finova B2B2C wealth-assistant widget.
+This repository contains the **deterministic financial engine** for the Finova B2B2C wealth-assistant widget.
 
 It provides:
 
-Required monthly savings calculation
+* Required monthly savings calculation
+* Behavioral feasibility status
+* Realism analysis vs. income
+* Horizon classification
+* Basic completion time prediction
+* Friendly natural-language explanation
 
-Behavioral feasibility status
+This engine is designed to be deployed on **Cloud Run** (Python API) as part of the Finova MVP stack.
 
-Realism analysis vs. income
+---
 
-Horizon classification
+## 🚀 Features
 
-Basic completion time prediction
-
-Friendly natural-language explanation
-
-This engine is designed to be deployed on Cloud Run (Python API) as part of the Finova MVP stack.
-
-🚀 Features
-✔️ Required Monthly Saving
+### ✔️ Required Monthly Saving
 
 Accurate, deterministic, auditable.
 
-✔️ Feasibility Classification
+### ✔️ Feasibility Classification
 
-on_track_comfortable
+* `on_track_comfortable`
+* `on_track_tight`
+* `behind`
+* `unknown`
 
-on_track_tight
+### ✔️ Realism vs Income
 
-behind
+* `realistic`
+* `very_hard`
+* `unrealistic`
 
-unknown
-
-✔️ Realism vs Income
-
-realistic
-
-very_hard
-
-unrealistic
-
-✔️ Prediction (MVP)
+### ✔️ Prediction (MVP)
 
 Simple projection based on average savings.
 
-✔️ Natural-Language Narrative
+### ✔️ Natural-Language Narrative
 
 Human-friendly, explainable guidance.
 
-🛠️ Tech Stack
+---
 
-Python 3.11
+## 🛠️ Tech Stack
 
-FastAPI
+* Python 3.11
+* FastAPI
+* Pydantic
+* Uvicorn
+* Dataclasses
 
-Pydantic
+---
 
-Uvicorn
-
-Dataclasses
-
-📦 Installation
+## 📦 Installation
 
 Clone the repository:
 
+```bash
 git clone https://github.com/<your-username>/finova-financial-engine.git
 cd finova-financial-engine
-
+```
 
 Create virtual environment:
 
+```bash
 python3 -m venv venv
 source venv/bin/activate
-
+```
 
 Install dependencies:
 
+```bash
 pip install -r requirements.txt
+```
 
-▶️ Running the API Locally
+---
+
+## ▶️ Running the API Locally
+
+```bash
 uvicorn main:app --reload
-
+```
 
 Then visit:
 
-👉 http://127.0.0.1:8000/docs (Swagger UI)
+👉 `http://127.0.0.1:8000/docs` (Swagger UI)
 
-🧪 Running Tests
+---
+
+## 🧪 Running Tests
+
+```bash
 pytest
-
+```
 
 This will run the automated unit tests including:
 
-zero-savings scenario
+* zero-savings scenario
+* unrealistic goal vs income
+* comfortable on-track scenario
 
-unrealistic goal vs income
+---
 
-comfortable on-track scenario
+## 📄 Project Structure
 
-📄 Project Structure
+```
 main.py                  # FastAPI server
 finance_engine.py        # Core financial logic
 requirements.txt         # Python dependencies
 test_finance_engine_basic.py  # Unit tests
 mock_data_transactions.py     # For future ML segmentation tests
 README.md                # Project documentation
+```
 
-🔮 Future Work (Roadmap)
+---
 
-Vertex AI Time Series model for savings prediction
+## 🔮 Future Work (Roadmap)
 
-Integration with bank transaction classification
+* Vertex AI Time Series model for savings prediction
+* Integration with bank transaction classification
+* Trend detection (spending drift)
+* Recommendation engine with LLM (Gemini)
+* Deployment to Cloud Run + Cloud Functions gateway
 
-Trend detection (spending drift)
+---
 
-Recommendation engine with LLM (Gemini)
+## 👥 Team
 
-Deployment to Cloud Run + Cloud Functions gateway
+* **Chams Bouzidi** — Finance Lead
+* **Vanessa Gunathasan** — Product Lead
+* **Dalanda Diallo** — Strategy Lead
+* **Mory Meite** — Lead Full-Stack Data Scientist
+
+---
+
+# 🔥 3. OPTIONAL: Add CI (Automatic Test Running)
+
+If you want GitHub to automatically run your tests on every push:
+
+Create this folder + file:
+
+```
+.github/workflows/python-tests.yml
+```
+
+Content:
+
+```yaml
+name: Run Engine Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: pytest
+```
+
+🔥 This makes GitHub run your engine tests automatically on every commit.
+
+---
+
+# 🚀 4. OPTIONAL: Add an Example Curl Test (for Vanessa & Dalanda)
+
+Put this inside README under “Examples”:
+
+```
+curl -X POST http://127.0.0.1:8000/calculate \
+  -H "Content-Type: application/json" \
+  -d '{
+        "target_amount": 5000,
+        "months_to_target": 12,
+        "avg_monthly_saving": 300,
+        "monthly_income": 2500,
+        "current_progress": 0
+      }'
+```
+
+---
+
+# 🎯 Next Action Options for You
+
+Tell me what you want to do next, I can guide you:
+
+### A. **Clean up the repo**
+
+### B. **Add advanced tests** (edge cases, heavy cases, extreme math)
+
+### C. **Add a full behavior simulation test using your mock transactions**
+
+### D. **Deploy this API to Cloud Run** (so the team can call it via internet)
+
+### E. **Add authentication (Firebase / API key)**
+
+### F. **Write the ML part (K-means segmentation)**
+
+### G. **Create the recommendation engine next**
+
+Just tell me **A / B / C / D / E / F / G** and I continue.
+
