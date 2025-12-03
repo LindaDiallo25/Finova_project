@@ -1,0 +1,120 @@
+📘 Finova Financial Calculation Engine (MVP)
+
+This repository contains the deterministic financial engine for the Finova B2B2C wealth-assistant widget.
+
+It provides:
+
+Required monthly savings calculation
+
+Behavioral feasibility status
+
+Realism analysis vs. income
+
+Horizon classification
+
+Basic completion time prediction
+
+Friendly natural-language explanation
+
+This engine is designed to be deployed on Cloud Run (Python API) as part of the Finova MVP stack.
+
+🚀 Features
+✔️ Required Monthly Saving
+
+Accurate, deterministic, auditable.
+
+✔️ Feasibility Classification
+
+on_track_comfortable
+
+on_track_tight
+
+behind
+
+unknown
+
+✔️ Realism vs Income
+
+realistic
+
+very_hard
+
+unrealistic
+
+✔️ Prediction (MVP)
+
+Simple projection based on average savings.
+
+✔️ Natural-Language Narrative
+
+Human-friendly, explainable guidance.
+
+🛠️ Tech Stack
+
+Python 3.11
+
+FastAPI
+
+Pydantic
+
+Uvicorn
+
+Dataclasses
+
+📦 Installation
+
+Clone the repository:
+
+git clone https://github.com/<your-username>/finova-financial-engine.git
+cd finova-financial-engine
+
+
+Create virtual environment:
+
+python3 -m venv venv
+source venv/bin/activate
+
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+▶️ Running the API Locally
+uvicorn main:app --reload
+
+
+Then visit:
+
+👉 http://127.0.0.1:8000/docs (Swagger UI)
+
+🧪 Running Tests
+pytest
+
+
+This will run the automated unit tests including:
+
+zero-savings scenario
+
+unrealistic goal vs income
+
+comfortable on-track scenario
+
+📄 Project Structure
+main.py                  # FastAPI server
+finance_engine.py        # Core financial logic
+requirements.txt         # Python dependencies
+test_finance_engine_basic.py  # Unit tests
+mock_data_transactions.py     # For future ML segmentation tests
+README.md                # Project documentation
+
+🔮 Future Work (Roadmap)
+
+Vertex AI Time Series model for savings prediction
+
+Integration with bank transaction classification
+
+Trend detection (spending drift)
+
+Recommendation engine with LLM (Gemini)
+
+Deployment to Cloud Run + Cloud Functions gateway
