@@ -1,40 +1,86 @@
 """
-Finova MVP Recommendation Engine (Phase I: Heuristic Logic)
+Finova MVP Recommendation Engine (Phase I: Heuristic Logic + GenAI Polish)
 
 This is the initial, deterministic, rule-based recommendation engine for the MVP.
-It relies solely on simple conditional logic (if/then) and current data inputs.
-
+It relies solely on simple conditional logic (if/then) and current data inputs,
+enhanced by Gemini for natural language generation.
 """
 
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
 import functions_framework
 import json
 from typing import Optional
+
+# --- AJOUTS POUR GEMINI ---
+import vertexai
+from vertexai.generative_models import GenerativeModel
+
+# Configuration GCP
+# TODO: Remplacez ceci par votre ID de projet Google Cloud réel
+PROJECT_ID = "votre-projet-finova-id" 
+LOCATION = "us-central1" # Assurez-vous que cette région correspond à vos ressources
 
 # --- Constants for Financial Precision ---
 D = Decimal
 TWO_PLACES = D('0.01')
 D_ZERO = D('0.00')
 
+def humanize_with_gemini(technical_advice: str, cluster_profile: str) -> str:
+    """
+    Utilise Gemini pour réécrire le conseil technique en langage naturel et empathique.
+    """
+    try:
+        # Initialisation de Vertex AI
+        vertexai.init(project=PROJECT_ID, location=LOCATION)
+        # Utilisation de 'gemini-1.5-flash' pour la rapidité et le coût réduit de l'MVP
+        model = GenerativeModel("gemini-1.5-flash") 
+        
+        prompt = f"""
+        Tu es Finova, un assistant financier empathique, clair et motivant.
+        
+        CONTEXTE CLIENT :
+        Profil : {cluster_profile}
+        
+        TA MISSION :
+        Réécris le message technique suivant pour qu'il soit court (max 2 phrases), 
+        encourageant et facile à comprendre pour un non-expert. 
+        Ne mentionne pas de termes techniques comme 'Déficit' ou 'Heuristique'.
+        
+        MESSAGE TECHNIQUE :
+        "{technical_advice}"
+        
+        REPONSE FINOVA :
+        """
+
+        response = model.generate_content(prompt)
+        return response.text.strip()
+
+    except Exception as e:
+        print(f"Erreur Gemini (repli sur le message technique): {str(e)}")
+        # Fallback : on renvoie le message technique brut si l'IA échoue ou n'est pas configurée
+        return technical_advice
+
 def generate_recommendation_heuristic_core(
     saving_deficit: float,
     top_discretionary_category: str,
     top_discretionary_amount: float,
     fixed_expenses_ratio: float,
-    has_lump_sum: bool = False
+    has_lump_sum: bool = False,
+    cluster_profile: str = "Standard" # <--- Nouveau paramètre pour le profil client
 ) -> str:
     """
     Core function: Generates a recommendation based on simple heuristic rules.
 
     Args:
         saving_deficit: The difference needed to meet the goal (Positive=Deficit, Negative=Surplus).
-        top_discretionary_category: The largest non-essential spending category (e.g., 'Dining Out').
+        top_discretionary_category: The largest non-essential spending category.
         top_discretionary_amount: The amount spent in that top category.
-        fixed_expenses_ratio: Ratio of fixed expenses to income (0.0 to 1.0).
+        fixed_expenses_ratio: Ratio of fixed expenses to income.
         has_lump_sum: Flag indicating a recent large, temporary income spike.
+        cluster_profile: The user segment derived from K-Means (e.g., 'High Spender').
 
     Returns:
-        A prioritized, actionable recommendation string.
+        A prioritized, actionable recommendation string (humanized by AI).
     """
     
     try:
@@ -42,33 +88,34 @@ def generate_recommendation_heuristic_core(
         deficit = D(str(saving_deficit)).quantize(TWO_PLACES)
         top_spend = D(str(top_discretionary_amount)).quantize(TWO_PLACES)
         fixed_ratio = D(str(fixed_expenses_ratio))
-    except InvalidOperation:
+    except (InvalidOperation, ValueError):
         return "ERROR: Invalid numeric input provided to the core calculator."
+
+    technical_message = ""
 
     # --- Rule Set 2: On Track/Ahead Actions (Prioritized: Look for windfall first) ---
     
     # R2.3: Reinvest Savings - Check for a recent lump sum (highest priority action)
     if has_lump_sum:
-        # Suggesting a fixed amount for simplicity in Phase I
-        return (
+        technical_message = (
             "WINDFALL DETECTED: We noticed a recent temporary income spike. "
             "Applying **$300** of this towards your goal could significantly accelerate your completion date!"
         )
         
-    if deficit <= D_ZERO: # User is on track or ahead (Surplus = deficit * -1)
+    elif deficit <= D_ZERO: # User is on track or ahead (Surplus = deficit * -1)
         surplus = deficit * D('-1') 
         
         # R2.2: Accelerate Goal - Large surplus suggests early achievement is possible.
         if surplus > D_ZERO and surplus >= D('50.00'):
             # Note: The "2 months early" figure is a static heuristic placeholder for MVP
-            return (
+            technical_message = (
                 f"FANTASTIC WORK! Your current saving pace has a **${surplus.quantize(TWO_PLACES)}** surplus. "
                 "You are on track to hit your goal **2 months early**! Keep going or consider increasing your goal target."
             )
 
         # R2.1: Maintain Success - Small surplus or exactly on track.
         else:
-            return (
+            technical_message = (
                 "GREAT JOB! You are currently on track to hit your goal on time. "
                 "We recommend maintaining your current saving habits."
             )
@@ -80,7 +127,7 @@ def generate_recommendation_heuristic_core(
         if top_spend >= deficit:
             # Round deficit cut to nearest dollar for simplicity in the recommendation message
             cut_amount = deficit.quantize(D('1'), rounding=ROUND_HALF_UP)
-            return (
+            technical_message = (
                 f"ACTION NEEDED: Your predicted saving deficit is ${deficit.quantize(TWO_PLACES)}. "
                 f"Try to reduce your **{top_discretionary_category}** budget by **${cut_amount}** this month to get back on track."
             )
@@ -88,7 +135,7 @@ def generate_recommendation_heuristic_core(
         # R1.2: Budget Review - Cutting the top category isn't enough.
         elif top_spend < deficit and deficit <= D('200.00'):
             remaining_cut = (deficit - top_spend).quantize(TWO_PLACES)
-            return (
+            technical_message = (
                 f"ACTION NEEDED: You need an extra ${deficit.quantize(TWO_PLACES)} this month. Reducing {top_discretionary_category} by ${top_spend.quantize(TWO_PLACES)} still leaves a gap of ${remaining_cut}. "
                 f"We recommend reviewing all **non-essential** spending this week to close the gap."
             )
@@ -98,13 +145,17 @@ def generate_recommendation_heuristic_core(
             # Simple heuristic: 1 month extension for every $50 deficit, minimum 2 months
             extension_months = max(2, int(deficit / D('50.00')))
             ratio_percent = (fixed_ratio * D('100')).quantize(D('1'))
-            return (
+            technical_message = (
                 f"GOAL REVIEW: Your required saving is aggressive ({ratio_percent}% fixed expenses). "
                 f"Consider extending your goal timeline by **{extension_months} months** for a more manageable monthly saving."
             )
     
-    # Fallback in case of unexpected zero values or error state
-    return "Check back soon for more specific personalized advice!"
+    # Fallback in case of unexpected conditions
+    if not technical_message:
+        technical_message = "Check back soon for more specific personalized advice!"
+
+    # --- Appel à Gemini pour humaniser le message ---
+    return humanize_with_gemini(technical_message, cluster_profile)
 
 # --- Cloud Function HTTP Entry Point ---
 
@@ -134,13 +185,15 @@ def generate_recommendation_heuristic_api(request):
             top_discretionary_category=request_json.get('topDiscretionaryCategory', 'Discretionary Spending'),
             top_discretionary_amount=request_json.get('topDiscretionaryAmount', 0.0),
             fixed_expenses_ratio=request_json.get('fixedExpensesRatio', 0.0),
-            has_lump_sum=request_json.get('hasLumpSum', False)
+            has_lump_sum=request_json.get('hasLumpSum', False),
+            # --- Récupération du profil cluster envoyé par le client/test ---
+            cluster_profile=request_json.get('clusterProfile', 'Standard')
         )
         
         response_data = {
             "recommendation": recommendation_text,
             "status": "success",
-            "source": "MVP Heuristics (Phase I)"
+            "source": "MVP Heuristics + Gemini AI (Phase I)"
         }
         return (json.dumps(response_data), 200, headers)
 
