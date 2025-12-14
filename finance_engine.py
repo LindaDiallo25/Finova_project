@@ -244,3 +244,4 @@ def evaluate_goal(goal: GoalInput) -> GoalOutput:
         realism_status=realism_status,
         horizon=horizon,
     )
+
