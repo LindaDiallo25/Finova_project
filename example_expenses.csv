@@ -1,0 +1,129 @@
+category,amount,date,description,merchant,payment_method
+Alimentation,45.50,2024-01-15,Courses,Carrefour,Carte
+Transport,20.00,2024-01-15,Essence,Shell,Carte
+Loisirs,30.00,2024-01-16,Cinéma,Cinéma Pathé,Carte
+Utilities,150.00,2024-01-16,Électricité,EDF,Virement
+Alimentation,52.00,2024-01-17,Courses,Leclerc,Carte
+Santé,89.99,2024-01-17,Pharmacie,Pharmacie Centrale,Carte
+Transport,15.00,2024-01-18,Bus,RATP,Carte
+Alimentation,38.50,2024-01-18,Restaurant,La Trattoria,Carte
+Vêtements,120.00,2024-01-19,Chaussures,Nike Store,Carte
+Loisirs,25.00,2024-01-19,Bowling,Bowling Palace,Espèces
+Restaurants,65.50,2024-01-20,Dîner,Le Comptoir,Carte
+Utilities,150.00,2024-01-23,Eau,Veolia,Virement
+Alimentation,48.75,2024-01-24,Courses,Auchan,Carte
+Transport,18.00,2024-01-25,Taxi,Uber,Carte
+Loisirs,40.00,2024-01-25,Jeux vidéo,PlayStation Store,Carte
+Santé,25.00,2024-01-26,Dentiste,Cabinet Dubois,Carte
+Alimentation,62.30,2024-01-27,Courses,Monoprix,Carte
+Restaurants,45.75,2024-01-27,Déjeuner,Subway,Carte
+Vêtements,89.90,2024-01-28,Pantalon,H&M,Carte
+Transport,22.50,2024-01-29,Carburant,Total,Carte
+Loisirs,35.00,2024-01-30,Concert,Ticketmaster,Carte
+Alimentation,70.50,2024-02-01,Marché bio,Marché Local,Espèces
+Utilities,150.00,2024-02-02,Internet,Orange,Virement
+Santé,156.00,2024-02-02,Consultation,Dr Martin,Carte
+Restaurants,52.25,2024-02-03,Dîner,Pizzeria Luigi,Carte
+Transport,25.00,2024-02-04,Essence,Esso,Carte
+Vêtements,199.99,2024-02-05,Manteau,Zara,Carte
+Loisirs,48.00,2024-02-06,Théâtre,Fnac Spectacles,Carte
+Alimentation,55.60,2024-02-07,Courses,Franprix,Carte
+Santé,45.00,2024-02-07,Optique,Optic 2000,Carte
+Restaurants,78.50,2024-02-08,Brunch,Le Café du Coin,Carte
+Transport,20.00,2024-02-09,Bus abonnement,RATP,Virement
+Alimentation,41.25,2024-02-10,Courses,Intermarché,Carte
+Loisirs,30.00,2024-02-11,Musée,Musée du Louvre,Carte
+Utilities,150.00,2024-02-12,Électricité,EDF,Virement
+Restaurants,65.00,2024-02-13,Dîner,Le Saint-Honoré,Carte
+Santé,32.50,2024-02-13,Pharmacie,Pharmacie Leclerc,Carte
+Vêtements,75.00,2024-02-14,Accessoires,Accessorize,Carte
+Transport,18.50,2024-02-15,Taxi,Bolt,Carte
+Alimentation,58.75,2024-02-16,Courses,Carrefour Market,Carte
+Loisirs,42.00,2024-02-17,Jeux,Nintendo eShop,Carte
+Restaurants,51.00,2024-02-18,Déjeuner,Starbucks,Carte
+Santé,89.00,2024-02-18,Bilan sanguin,Laboratoire Synlab,Carte
+Transport,24.00,2024-02-19,Essence,BP,Carte
+Alimentation,63.45,2024-02-20,Courses,Super U,Carte
+Utilities,150.00,2024-02-21,Gaz,GRDF,Virement
+Loisirs,55.00,2024-02-22,Streaming,Netflix,Carte
+Restaurants,44.75,2024-02-23,Dîner,Le Marais,Carte
+Vêtements,125.00,2024-02-24,Chaussures,Adidas,Carte
+Transport,21.00,2024-02-25,Carburant,Leclerc Station,Carte
+Alimentation,49.80,2024-02-26,Courses,Géant Casino,Carte
+Santé,75.00,2024-02-26,Kiné,Cabinet Physio,Carte
+Loisirs,28.00,2024-02-27,Livre,Fnac,Carte
+Restaurants,62.50,2024-02-28,Dîner,Bistro Parisien,Carte
+Alimentation,51.30,2024-02-29,Courses,Carrefour,Carte
+Transport,19.50,2024-03-01,Essence,Shell,Carte
+Loisirs,33.00,2024-03-02,Cinéma,Cinéma Pathé,Carte
+Utilities,150.00,2024-03-03,Électricité,EDF,Virement
+Alimentation,54.75,2024-03-04,Courses,Leclerc,Carte
+Santé,92.50,2024-03-05,Pharmacie,Pharmacie Centrale,Carte
+Transport,16.00,2024-03-06,Bus,RATP,Carte
+Alimentation,40.25,2024-03-07,Restaurant,Pizza Palace,Carte
+Vêtements,115.00,2024-03-08,Chaussures,Puma Store,Carte
+Loisirs,28.00,2024-03-09,Bowling,Bowling Palace,Espèces
+Restaurants,68.50,2024-03-10,Dîner,Le Comptoir,Carte
+Utilities,150.00,2024-03-12,Eau,Veolia,Virement
+Alimentation,46.50,2024-03-13,Courses,Auchan,Carte
+Transport,20.50,2024-03-14,Taxi,Uber,Carte
+Loisirs,44.00,2024-03-15,Jeux vidéo,PlayStation Store,Carte
+Santé,28.00,2024-03-16,Dentiste,Cabinet Dubois,Carte
+Alimentation,59.25,2024-03-17,Courses,Monoprix,Carte
+Restaurants,48.75,2024-03-18,Déjeuner,McDonald's,Carte
+Vêtements,92.50,2024-03-19,Pantalon,H&M,Carte
+Transport,23.50,2024-03-20,Carburant,Total,Carte
+Loisirs,37.00,2024-03-21,Concert,Ticketmaster,Carte
+Alimentation,72.10,2024-03-22,Marché bio,Marché Local,Espèces
+Utilities,150.00,2024-03-23,Internet,Orange,Virement
+Santé,160.00,2024-03-24,Consultation,Dr Martin,Carte
+Restaurants,55.25,2024-03-25,Dîner,Pizzeria Luigi,Carte
+Transport,26.00,2024-03-26,Essence,Esso,Carte
+Vêtements,205.00,2024-03-27,Manteau,Zara,Carte
+Loisirs,50.00,2024-03-28,Théâtre,Fnac Spectacles,Carte
+Alimentation,57.30,2024-03-29,Courses,Franprix,Carte
+Santé,48.00,2024-03-30,Optique,Optic 2000,Carte
+Restaurants,80.50,2024-03-31,Brunch,Le Café du Coin,Carte
+Transport,21.00,2024-04-01,Bus abonnement,RATP,Virement
+Alimentation,43.25,2024-04-02,Courses,Intermarché,Carte
+Loisirs,32.00,2024-04-03,Musée,Musée d'Orsay,Carte
+Utilities,150.00,2024-04-04,Électricité,EDF,Virement
+Restaurants,67.00,2024-04-05,Dîner,Le Saint-Honoré,Carte
+Santé,35.50,2024-04-06,Pharmacie,Pharmacie Leclerc,Carte
+Vêtements,78.00,2024-04-07,Accessoires,Accessorize,Carte
+Transport,19.50,2024-04-08,Taxi,Bolt,Carte
+Alimentation,60.75,2024-04-09,Courses,Carrefour Market,Carte
+Loisirs,45.00,2024-04-10,Jeux,Nintendo eShop,Carte
+Restaurants,53.00,2024-04-11,Déjeuner,Starbucks,Carte
+Santé,91.00,2024-04-12,Bilan sanguin,Laboratoire Synlab,Carte
+Transport,25.50,2024-04-13,Essence,BP,Carte
+Alimentation,65.45,2024-04-14,Courses,Super U,Carte
+Utilities,150.00,2024-04-15,Gaz,GRDF,Virement
+Loisirs,57.00,2024-04-16,Streaming,Disney+,Carte
+Restaurants,46.75,2024-04-17,Dîner,Le Marais,Carte
+Vêtements,128.00,2024-04-18,Chaussures,Adidas,Carte
+Transport,22.50,2024-04-19,Carburant,Leclerc Station,Carte
+Alimentation,51.80,2024-04-20,Courses,Géant Casino,Carte
+Santé,78.00,2024-04-21,Kiné,Cabinet Physio,Carte
+Loisirs,30.00,2024-04-22,Livre,Fnac,Carte
+Restaurants,64.50,2024-04-23,Dîner,Bistro Parisien,Carte
+Alimentation,48.15,2024-04-24,Courses,Carrefour,Carte
+Transport,21.00,2024-04-25,Essence,Shell,Carte
+Loisirs,35.00,2024-04-26,Cinéma,Cinéma Pathé,Carte
+Utilities,150.00,2024-04-27,Électricité,EDF,Virement
+Alimentation,56.50,2024-04-28,Courses,Leclerc,Carte
+Santé,95.00,2024-04-29,Pharmacie,Pharmacie Centrale,Carte
+Transport,17.00,2024-04-30,Bus,RATP,Carte
+Alimentation,42.50,2024-05-01,Restaurant,La Trattoria,Carte
+Vêtements,118.00,2024-05-02,Chaussures,Nike Store,Carte
+Loisirs,26.00,2024-05-03,Bowling,Bowling Palace,Espèces
+Restaurants,70.50,2024-05-04,Dîner,Le Comptoir,Carte
+Utilities,150.00,2024-05-05,Eau,Veolia,Virement
+Alimentation,50.75,2024-05-06,Courses,Auchan,Carte
+Transport,19.00,2024-05-07,Taxi,Uber,Carte
+Loisirs,42.00,2024-05-08,Jeux vidéo,PlayStation Store,Carte
+Santé,27.00,2024-05-09,Dentiste,Cabinet Dubois,Carte
+Alimentation,64.30,2024-05-10,Courses,Monoprix,Carte
+Restaurants,47.75,2024-05-11,Déjeuner,Subway,Carte
+Vêtements,91.90,2024-05-12,Pantalon,H&M,Carte
+Transport,24.50,2024-05-13,Carburant,Total,Carte

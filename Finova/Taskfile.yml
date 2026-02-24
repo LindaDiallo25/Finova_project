@@ -1,0 +1,51 @@
+version: '3'
+tasks:
+  setup:
+    desc: Setup le projet complet
+    cmds:
+      - docker-compose up --build
+
+  dev:
+    desc: Lancer en mode développement
+    cmds:
+      - docker-compose up
+
+  stop:
+    desc: Arrêter tous les services
+    cmds:
+      - docker-compose down
+
+  logs:
+    desc: Afficher les logs
+    cmds:
+      - docker-compose logs -f
+
+  logs-backend:
+    desc: Logs du backend
+    cmds:
+      - docker-compose logs -f backend
+
+  logs-frontend:
+    desc: Logs du frontend
+    cmds:
+      - docker-compose logs -f frontend
+
+  clean:
+    desc: Nettoyer les volumes Docker
+    cmds:
+      - docker-compose down -v
+
+  migrate:
+    desc: Lancer les migrations DB
+    cmds:
+      - docker-compose exec backend alembic upgrade head
+
+  shell-backend:
+    desc: Accéder au shell du backend
+    cmds:
+      - docker-compose exec backend bash
+
+  shell-db:
+    desc: Accéder à la DB PostgreSQL
+    cmds:
+      - docker-compose exec postgres psql -U finova -d finova_db
