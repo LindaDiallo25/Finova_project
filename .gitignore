@@ -1,8 +1,59 @@
-# Fichiers de données bancaires
-Finova/export-operations-24-02-2026_15-29-24 - export-operations-24-02-2026_15-29-24.csv
-Finova/example_expenses.numbers
-Finova/Data_Bancaire.numbers
-
-# Dossiers
-Finova_V2/
+# Dossiers sensibles
 old/
+Finova_V2/
+
+# Fichiers d'environnement
+.env
+.env.development
+.env.local
+.env.*.local
+
+# Fichiers de données bancaires et sensibles
+*.csv
+*.numbers
+export-operations-*
+example_expenses.*
+Data_Bancaire.*
+
+# Fichiers système
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.DS_Store
+*.code-workspace
+
+# Résidu de Finova/
+Finova/
